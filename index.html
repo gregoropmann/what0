@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>what0</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: monospace;
+      background: black;
+      overflow-x: hidden;
+    }
+
+    .hello {
+      white-space: nowrap;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    #startBtn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 9999;
+      font-size: 18px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<button id="startBtn" onclick="start()"> DO NOT CLICK!!</button>
+
+<audio id="music" src="audio.mp3" loop></audio>
+
+<script>
+  const music = document.getElementById("music");
+  const btn = document.getElementById("startBtn");
+
+  let running = false;
+  let counter = 1;
+
+  function rand(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  function randomColor() {
+    return `rgb(${rand(0,255)}, ${rand(0,255)}, ${rand(0,255)})`;
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+
+    btn.remove();
+
+    music.volume = 1.0;
+    music.play();
+
+    spam();
+  }
+
+  function spam() {
+    document.body.style.backgroundColor = randomColor();
+
+    for (let i = 0; i < 20; i++) {
+      const div = document.createElement("div");
+      div.className = "hello";
+      div.textContent = `${counter}. Your device has been hacked.`;
+      div.style.color = randomColor();
+      document.body.appendChild(div);
+      counter++;
+    }
+
+    window.scrollTo(0, document.body.scrollHeight);
+    requestAnimationFrame(spam);
+  }
+</script>
+
+</body>
+</html>

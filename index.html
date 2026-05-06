@@ -10,12 +10,10 @@
       overflow-x: hidden;
     }
     .hello {
-    white-space: nowrap;
-    font-size: 10px;
-    font-weight: bold;
-    display: block;
-    text-align: center;
-    width: 100%;
+      white-space: nowrap;
+      font-weight: bold;
+      display: block;
+      text-align: left;
     }
     #startBtn {
       position: fixed;
@@ -72,14 +70,11 @@
   }
   function fitText(el) {
   const parentWidth = window.innerWidth;
-  let fontSize = 10;
-  el.style.fontSize = fontSize + "px";
-  while (el.scrollWidth < parentWidth && fontSize < 200) {
-    fontSize += 1;
-    el.style.fontSize = fontSize + "px";
-  }
-  el.style.fontSize = (fontSize - 1) + "px";
-  }
+  const textWidth = el.scrollWidth;
+  const scale = parentWidth / textWidth;
+  el.style.transform = `scale(${scale})`;
+  el.style.transformOrigin = "left center";
+}
 </script>
 </body>
 </html>

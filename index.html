@@ -11,20 +11,25 @@
     }
     .hello {
       white-space: nowrap;
-      font-size: 24px;
+      font-size: 48px;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+      text-align: center;
     }
     #startBtn {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    z-index: 9999;
-    font-size: 48px;
-    padding: 40px 0;
-    cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 9999;
+      font-size: 48px;
+      padding: 40px 0;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -36,7 +41,6 @@
   const btn = document.getElementById("startBtn");
   let running = false;
   let counter = 1;
-
   function rand(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   }
@@ -47,11 +51,9 @@
     if (running) return;
     running = true;
     btn.remove();
-
     const el = document.documentElement;
     const requestFS = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen;
     if (requestFS) requestFS.call(el);
-
     music.volume = 1.0;
     music.play();
     spam();
